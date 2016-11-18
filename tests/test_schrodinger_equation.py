@@ -28,7 +28,9 @@ class TestSchrodinger_equation(unittest.TestCase):
 
 
     def test_fourier_basis(self):
-        pass
+        test = Schrodinger(0.5, -0.5, 50, 1, lambda x: x**3 - 3*x)
+        x = test.get_basis()
+        self.assertEqual(len(x), 50)
 
     def test_legendre_basis(self):
         test = Schrodinger(0.5, -.5, 50, 0, lambda x: x)
@@ -37,6 +39,29 @@ class TestSchrodinger_equation(unittest.TestCase):
         soln[1] = 1
         for i in range(len(soln)):
             self.assertTrue(abs(soln[i] - x[i]) <= self.constraint) #Check that there is minimal error
+
+    def test_legendre_hamiltonian(self):
+        test = Schrodinger(0.5, -0.5, 50, 0, lambda x: x**3 - 3*x)
+        test.get_basis()
+        b = test.apply_hamiltonian()
+        self.assertTrue(len(b) != 0)
+        valuesAreZero = False
+        for i in b:
+            valuesAreZero = valuesAreZero and i == 0
+
+        self.assertTrue(not valuesAreZero)
+
+
+    def test_fourier_hamiltonian(self):
+        test = Schrodinger(0.5, -0.5, 50, 1, lambda x: x**3 - 3*x)
+        test.get_basis()
+        b = test.apply_hamiltonian()
+        self.assertTrue(len(b) != 0)
+        valuesAreZero = False
+        for i in b:
+            valuesAreZero = valuesAreZero and i == 0
+
+        self.assertTrue(not valuesAreZero)
 
     def tearDown(self):
 
