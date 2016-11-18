@@ -3,15 +3,8 @@ Schrodinger Equation
 ===============================
 
 
-.. image:: https://img.shields.io/pypi/v/schrodinger_equation.svg
-        :target: https://pypi.python.org/pypi/schrodinger_equation
-
-.. image:: https://img.shields.io/travis/arosenstein/schrodinger_equation.svg
-        :target: https://travis-ci.org/arosenstein/schrodinger_equation
-
-.. image:: https://readthedocs.org/projects/schrodinger-equation/badge/?version=latest
-        :target: https://schrodinger-equation.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
+.. image:: https://travis-ci.org/arosenstein/schrodinger_equation.svg?branch=master
+    :target: https://travis-ci.org/arosenstein/schrodinger_equation
 
 .. image:: https://pyup.io/repos/github/arosenstein/schrodinger_equation/shield.svg
      :target: https://pyup.io/repos/github/arosenstein/schrodinger_equation/
@@ -28,7 +21,24 @@ Schrodinger Equation solver
 Features
 --------
 
-* TODO
+* This program solves the Schrodinger Equation by approximating wave functions with both legendre polynomials and fourier series.
+
+* Also uses the variational principle to minimize energy of the system given constraints.
+
+How to Use
+--------
+* In order to run, all of the information goes in the constructor of the ``Schrodinger`` class. It takes in the following parameters:
+  - Initial Potential Energy
+  - Constant to be used in the Schrodinger Equation
+  - Size of the basis set (number of terms in approximation)
+  - Which approximation method to use for the wavefunction
+  - Wavefunction
+
+Constructor examples can be found in the tests.
+
+TODO
+--------
+* Add alternative ways to approximate wave functions 
 
 Credits
 ---------
