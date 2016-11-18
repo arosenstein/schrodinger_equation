@@ -22,6 +22,7 @@ class Schrodinger:
 		self.basis_function = basis_function
 		self.fxn = fxn
 		self.x = np.linspace(0,2,2000)
+		self.l = abs(self.x[0] - self.x[-1])
 
 	def get_basis(self):
 		'''Determines basis set coefficients for the given wavefunction
@@ -29,18 +30,43 @@ class Schrodinger:
 
 		
 		if self.basis_function == 0:
-			return np.polynomial.legendre.legfit(self.x, self.fxn(self.x), self.basis_size - 1)
+			self.basis_set = np.polynomial.legendre.legfit(self.x, self.fxn(self.x), self.basis_size - 1)
 		
 		elif self.basis_function == 1:
-			return np.array([self._cn(self.fxn, i) for i in range(self.basis_size)])
+			self.basis_set = np.array([self._cn(self.fxn, i) for i in range(self.basis_size)])
 
 		else:
-			return None
+			self.basis_set = None
+
+		return self.basis_set
 
 	def _cn(self, fxn, n):
 		l = abs(self.x[0] - self.x[-1])
 		c = self.fxn(x) * np.exp(-2j * n * np.pi * self.x / l)
 		return c.sum()/c.size()
+
+	def apply_hamiltonian(self):
+		'''
+		'''
+
+		if self.basis_function == 0:
+			temp = np.polynomial.legendre.legder(self.basis_set, 2)
+			d_2 = np.zeros(temp.size() + 2)
+			for i in range(len(temp.size())):
+				d_2[i] = temp[i]
+			self.converted_basis = -self.c * d_2 + self.V0 * self.basis_set * self.l
+
+		elif self.basis_function == 1:
+			hmat = np.zeros([self.basis_size, self.basis_size])
+			for i in range(self.basis_size):
+				hmat[i][i] = (-4 * (i**2) * (np.pi ** 2) / self.l)
+			self.converted_basis = hmat.dot(self.basis_set)
+
+		else:
+			self.converted_basis = None
+
+		return self.converted_basis
+
 
 
 
