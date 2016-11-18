@@ -28,10 +28,15 @@ Features
 How to Use
 --------
 * In order to run, all of the information goes in the constructor of the ``Schrodinger`` class. It takes in the following parameters:
+  
   - Initial Potential Energy
+  
   - Constant to be used in the Schrodinger Equation
+  
   - Size of the basis set (number of terms in approximation)
+  
   - Which approximation method to use for the wavefunction
+  
   - Wavefunction
 
 Constructor examples can be found in the tests.
