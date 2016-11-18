@@ -23,12 +23,10 @@ deploy:
       M2JTeXZUWTJKVW5OZVZyNTMwVVhoWElqRnBlSnM1YXp0S3Y3U3M1ZTJxSzMxcXd4M2JUTFd4bXc9
 env:
 - TOXENV=py35
-- TOXENV=py34
-- TOXENV=py33
-- TOXENV=py27
-- TOXENV=py26
-- TOXENV=pypy
-install: pip install -U tox
+
+install: 
+- pip install numpy
+- pip install .
 language: python
 python: 3.5
-script: tox -e ${TOXENV}
+script: 
