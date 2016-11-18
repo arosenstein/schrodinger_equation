@@ -43,7 +43,7 @@ class TestSchrodinger_equation(unittest.TestCase):
     def test_legendre_hamiltonian(self):
         test = Schrodinger(0.5, -0.5, 50, 0, lambda x: x**3 - 3*x)
         test.get_basis()
-        b = test.apply_hamiltonian()
+        b = test.apply_hamiltonian(test.basis_set)
         self.assertTrue(len(b) != 0)
         valuesAreZero = False
         for i in b:
@@ -55,13 +55,19 @@ class TestSchrodinger_equation(unittest.TestCase):
     def test_fourier_hamiltonian(self):
         test = Schrodinger(0.5, -0.5, 50, 1, lambda x: x**3 - 3*x)
         test.get_basis()
-        b = test.apply_hamiltonian()
+        b = test.apply_hamiltonian(test.basis_set)
         self.assertTrue(len(b) != 0)
         valuesAreZero = False
         for i in b:
             valuesAreZero = valuesAreZero and i == 0
 
         self.assertTrue(not valuesAreZero)
+
+    def test_variation(self):
+        test = Schrodinger(0.5, -0.5, 50, 1, lambda x: x**3 - 3*x)
+        e_min = test.variation(basis = np.ones(50))
+        self.assertTrue(e_min != 0)
+
 
     def tearDown(self):
 
